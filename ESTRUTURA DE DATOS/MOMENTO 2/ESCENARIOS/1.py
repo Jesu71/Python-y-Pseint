@@ -9,7 +9,6 @@ class Alerta:
         # Representación en texto de la alerta.
         return f"[{self.hora}] {self.tipo} - Prioridad: {self.prioridad}"
 
-
 class PilaAlertas:
     def __init__(self):
         # Inicializa una pila vacía.
@@ -44,7 +43,6 @@ class PilaAlertas:
         # Elimina todas las alertas de la pila.
         self.items = []
         return "Todas las alertas han sido eliminadas"
-
 
 class SistemaSeguridad:
     def __init__(self):
@@ -110,7 +108,6 @@ class SistemaSeguridad:
             return "No hay alertas de alta prioridad"
         
         return alertas_alta_prioridad
-
 
 # Ejemplo de uso del sistema
 if __name__ == "__main__":
