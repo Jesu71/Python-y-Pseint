@@ -1,0 +1,1 @@
+DROP DATABASE inventario_ropa;
