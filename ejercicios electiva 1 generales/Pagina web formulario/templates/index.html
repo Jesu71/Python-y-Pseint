@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Seleccione una opción</h2>
+<ul>
+    <li><a href="{{ url_for('par_impar') }}">Identificador de número par e impar</a></li>
+    <li><a href="{{ url_for('campo') }}">Calculadora de ancho y longitud de campo</a></li>
+    <li><a href="{{ url_for('habitacion') }}">Calculadora de ancho y largo de habitación</a></li>
+    <li><a href="{{ url_for('vocal_consonante') }}">Identificador de vocal o consonante</a></li>
+</ul>
+{% endblock %}

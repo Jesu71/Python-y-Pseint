@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tienda Online</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    {% for producto in productos %}
+        <div>
+            <img src="{{ url_for('static', filename=producto.imagen) }}" width="100">
+            <p>{{ producto.nombre }} - ${{ producto.precio }}</p>
+            <a href="{{ url_for('agregar', producto_id=producto.id) }}">Agregar al carrito</a>
+        </div>
+    {% endfor %}
+    <a href="{{ url_for('ver_carrito') }}">Ver Carrito</a>
+</body>
+</html>

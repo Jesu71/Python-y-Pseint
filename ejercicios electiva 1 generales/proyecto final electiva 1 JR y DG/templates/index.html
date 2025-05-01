@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Juego de Dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dado {
+            font-size: 100px;
+            margin: 20px;
+            transition: transform 0.5s;
+        }
+
+        .girando {
+            transform: rotate(360deg);
+        }
+
+        .resultado {
+            font-size: 24px;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            display: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎲 Juego de Dados 🎲</h1>
+
+    <div>
+        <input type="text" id="nombre_jugador" placeholder="Tu nombre" required>
+    </div>
+
+    <div class="dado" id="dado">🎲</div>
+
+    <div class="resultado" id="resultado"></div>
+
+    <button onclick="tirarDado()">Tirar Dado</button>
+    <p><a href="/historial">Ver Historial</a></p>
+
+    <script>
+        function tirarDado() {
+            const nombreJugador = document.getElementById('nombre_jugador').value;
+            if (!nombreJugador) {
+                alert('Por favor, ingresa tu nombre');
+                return;
+            }
+
+            const dado = document.getElementById('dado');
+            const resultadoDiv = document.getElementById('resultado');
+
+            dado.classList.add('girando');
+            resultadoDiv.style.display = 'none';
+
+            fetch('/tirar_dado', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `nombre_jugador=${encodeURIComponent(nombreJugador)}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setTimeout(() => {
+                        dado.classList.remove('girando');
+                        resultadoDiv.textContent = `¡${data.nombre} sacó un ${data.resultado}!`;
+                        resultadoDiv.style.display = 'block';
+                    }, 500);
+                });
+        }
+    </script>
+</body>
+
+</html>

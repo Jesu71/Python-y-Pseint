@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <h1>Carrito de Compras</h1>
+    {% for item in carrito %}
+        <div>
+            <img src="{{ url_for('static', filename=item.producto.imagen) }}" width="100">
+            <p>{{ item.producto.nombre }} - Cantidad: {{ item.cantidad }} - Total: ${{ item.cantidad * item.producto.precio }}</p>
+        </div>
+    {% endfor %}
+    <p>Total: ${{ total }}</p>
+    <a href="{{ url_for('vaciar_carrito') }}">Vaciar Carrito</a>
+    <a href="{{ url_for('home') }}">Seguir Comprando</a>
+</body>
+</html>

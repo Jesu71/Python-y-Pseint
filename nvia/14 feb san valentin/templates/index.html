@@ -1,0 +1,150 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de San Valentín</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+        }
+
+        .envelope {
+            width: 400px;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .card-front {
+            width: 100%;
+            height: 100%;
+            background-color: #c94c4c;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform-origin: center;
+            transition: transform 0.6s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .envelope.open .card-front {
+            transform: rotateX(180deg);
+        }
+
+        .stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart {
+            color: #c94c4c;
+            font-size: 24px;
+        }
+
+        .text {
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotateX(-180deg);
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+            z-index: 1;
+        }
+
+        .envelope.open .card-inner {
+            transform: rotateX(0deg);
+        }
+
+        .message {
+            color: #c94c4c;
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.3s;
+        }
+
+        .envelope.open .message {
+            opacity: 1;
+        }
+
+        .flowers {
+            width: 50px;
+            height: 50px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="toggleEnvelope(this)">
+        <div class="card-front">
+            <div class="stamp">
+                <div class="heart">❤</div>
+            </div>
+            <div class="text">
+                <p>Para: Paula, mi novia querida.</p>
+                <p>De parte de: Jesus, tu novio adorado jejeje.</p>
+            </div>
+        </div>
+        <div class="card-inner">
+            <div class="message">
+                <h3>Cuanto más tiempo estoy contigo</h3>
+                <h3>más te amo!</h3>
+            </div>
+            <img class="flowers" src="{{ url_for('static', filename='flowers.png') }}" alt="Flores">
+        </div>
+    </div>
+
+    <audio id="music" loop>
+        <source src="{{ url_for('static', filename='music.mp3') }}" type="audio/mp3">
+    </audio>
+
+    <script>
+        let isPlaying = false;
+        const audio = document.getElementById('music');
+
+        function toggleEnvelope(envelope) {
+            envelope.classList.toggle('open');
+            
+            if (!isPlaying) {
+                audio.play();
+                isPlaying = true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Identificador de número par e impar</h2>
+<form method="post">
+    <div class="form-group">
+        <label for="numero">Ingresa un número:</label>
+        <input type="text" class="form-control" id="numero" name="numero" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Verificar</button>
+</form>
+{% if resultado %}
+    <p class="mt-3">{{ resultado }}</p>
+{% endif %}
+{% endblock %}
